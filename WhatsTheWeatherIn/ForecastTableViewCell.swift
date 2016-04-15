@@ -10,47 +10,47 @@ import UIKit
 
 class ForecastTableViewCell: UITableViewCell {
 
-	var forecast: WeatherForecastEntity? {
-		didSet {
-			updateCell()
-		}
-	}
+    var forecast: WeatherForecastEntity? {
+        didSet {
+            updateCell()
+        }
+    }
 
-	@IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var dateLabel: UILabel!
 
-	@IBOutlet weak var cityDegreesLabel: UILabel!
-	@IBOutlet weak var weatherMessageLabel: UILabel!
-	@IBOutlet weak var weatherImageOutlet: UIImageView!
+    @IBOutlet weak var cityDegreesLabel: UILabel!
+    @IBOutlet weak var weatherMessageLabel: UILabel!
+    @IBOutlet weak var weatherImageOutlet: UIImageView!
 
-	func updateCell() {
-		if let forecastToShow = forecast {
-			let formatter = NSDateFormatter()
-			formatter.dateStyle = .MediumStyle
-			formatter.timeStyle = .ShortStyle
-			formatter.setLocalizedDateFormatFromTemplate("h a")
-			dateLabel.text = formatter.stringFromDate(forecastToShow.date!)
+    func updateCell() {
+        if let forecastToShow = forecast {
+            let formatter = NSDateFormatter()
+            formatter.dateStyle = .MediumStyle
+            formatter.timeStyle = .ShortStyle
+            formatter.setLocalizedDateFormatFromTemplate("h a")
+            dateLabel.text = formatter.stringFromDate(forecastToShow.date!)
 
-			if let temp = forecastToShow.temp {
-				cityDegreesLabel.text = "\(temp)°C"
-			}
-			weatherMessageLabel.text = forecastToShow.description
+            if let temp = forecastToShow.temp {
+                cityDegreesLabel.text = "\(temp)°C"
+            }
+            weatherMessageLabel.text = forecastToShow.description
 
-			dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) { () -> Void in
-				if let data = NSData(contentsOfURL: NSURL(string: Constants.baseImageURL + forecastToShow.imageID! + Constants.imageExtension)!) {
-					if let image = UIImage(data: data) {
-						dispatch_async(dispatch_get_main_queue()) { self.weatherImageOutlet.image = image }
-					}
-				}
-			}
-		}
-	}
+            dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) { () -> Void in
+                if let data = NSData(contentsOfURL: NSURL(string: Constants.baseImageURL + forecastToShow.imageID! + Constants.imageExtension)!) {
+                    if let image = UIImage(data: data) {
+                        dispatch_async(dispatch_get_main_queue()) { self.weatherImageOutlet.image = image }
+                    }
+                }
+            }
+        }
+    }
 
-	override func awakeFromNib() {
-		super.awakeFromNib()
-		updateCell()
-	}
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        updateCell()
+    }
 
-	override func setSelected(selected: Bool, animated: Bool) {
-		super.setSelected(selected, animated: animated)
-	}
+    override func setSelected(selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+    }
 }

@@ -78,6 +78,7 @@
 				9CA525EC1BCA4D8900029D72 /* Weather.swift */,
 				F594C7C31C986C2300706BF6 /* Defines.swift */,
 				F594C7C51C986D0900706BF6 /* Extensions.swift */,
+				9CEF80ED1BBFC4EA007ECB47 /* AppDelegate.swift */,
 				9CEF811D1BBFCF1F007ECB47 /* Supporting Files */,
 			);
 			path = WhatsTheWeatherIn;
@@ -86,7 +87,6 @@
 		9CEF811D1BBFCF1F007ECB47 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				9CEF80ED1BBFC4EA007ECB47 /* AppDelegate.swift */,
 				9CEF80F41BBFC4EA007ECB47 /* Assets.xcassets */,
 				9CEF80F61BBFC4EA007ECB47 /* LaunchScreen.storyboard */,
 				9CEF80F91BBFC4EA007ECB47 /* Info.plist */,

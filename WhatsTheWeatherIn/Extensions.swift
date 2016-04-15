@@ -11,13 +11,12 @@ import Moya
 import ObjectMapper
 
 extension NSDate {
-    
-	var dayString: String {
-		let formatter = NSDateFormatter()
-		formatter.setLocalizedDateFormatFromTemplate("d M")
-		return formatter.stringFromDate(self)
-	}
-    
+
+    var dayString: String {
+        let formatter = NSDateFormatter()
+        formatter.setLocalizedDateFormatFromTemplate("d M")
+        return formatter.stringFromDate(self)
+    }
 }
 
 public extension Response {
@@ -28,7 +27,6 @@ public extension Response {
         }
         return object
     }
-    
 }
 
 public extension ObservableType where E == Response {
@@ -37,8 +35,7 @@ public extension ObservableType where E == Response {
         return observeOn(SerialDispatchQueueScheduler(globalConcurrentQueueQOS: .Background))
             .flatMap { response -> Observable<T> in
                 return Observable.just(try response.mapObject())
-            }
+        }
             .observeOn(MainScheduler.instance)
     }
-
 }

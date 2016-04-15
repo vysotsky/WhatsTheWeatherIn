@@ -1,16 +1,16 @@
 {
-  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "7379AC14B3F6515D5AAD31A2A41A498F61FEE24C",
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "D42A2F1371F1B1C1716BA114D1D02A1A968BBDBF",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
 
   },
   "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
     "62C0BF5F66328B65070EAF3082C70F062972A432" : 0,
-    "7379AC14B3F6515D5AAD31A2A41A498F61FEE24C" : 0
+    "D42A2F1371F1B1C1716BA114D1D02A1A968BBDBF" : 0
   },
   "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "C2795601-3AE0-4CAE-8F51-84D048177D68",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
     "62C0BF5F66328B65070EAF3082C70F062972A432" : "",
-    "7379AC14B3F6515D5AAD31A2A41A498F61FEE24C" : "ReactiveWeatherExample\/"
+    "D42A2F1371F1B1C1716BA114D1D02A1A968BBDBF" : "ReactiveWeatherExample\/"
   },
   "DVTSourceControlWorkspaceBlueprintNameKey" : "WhatsTheWeatherIn",
   "DVTSourceControlWorkspaceBlueprintVersion" : 204,
@@ -24,7 +24,7 @@
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/mohwaili\/ReactiveWeatherExample.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "7379AC14B3F6515D5AAD31A2A41A498F61FEE24C"
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "D42A2F1371F1B1C1716BA114D1D02A1A968BBDBF"
     }
   ]
 }
