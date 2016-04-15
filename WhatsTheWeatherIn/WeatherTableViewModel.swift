@@ -14,7 +14,7 @@ import RxSwift
 import Moya
 import ObjectMapper
 
-class WeatherTableViewModel {
+class WeatherTableViewModel: BaseViewModel {
 
     var disposeBag = DisposeBag()
 
@@ -55,12 +55,10 @@ class WeatherTableViewModel {
     }
 
     func setWeatherImageForImageID(imageID: String) {
-        dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) { () -> Void in
+        dispatchInGlobalQueue {
             if let url = NSURL(string: Constants.baseImageURL + imageID + Constants.imageExtension) {
                 if let data = NSData(contentsOfURL: url) {
-                    dispatch_async(dispatch_get_main_queue()) { () -> Void in
-                        self.weatherImage.on(.Next(UIImage(data: data)))
-                    }
+                    self.dispatchInMainQueue { self.weatherImage.on(.Next(UIImage(data: data))) }
                 }
             }
         }

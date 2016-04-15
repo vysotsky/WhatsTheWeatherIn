@@ -16,6 +16,7 @@
 		9CEF80F31BBFC4EA007ECB47 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9CEF80F11BBFC4EA007ECB47 /* Main.storyboard */; };
 		9CEF80F51BBFC4EA007ECB47 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9CEF80F41BBFC4EA007ECB47 /* Assets.xcassets */; };
 		9CEF80F81BBFC4EA007ECB47 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9CEF80F61BBFC4EA007ECB47 /* LaunchScreen.storyboard */; };
+		F51F83D01CC0FEB900FB48A7 /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F51F83CF1CC0FEB900FB48A7 /* BaseViewModel.swift */; };
 		F594C7C41C986C2300706BF6 /* Defines.swift in Sources */ = {isa = PBXBuildFile; fileRef = F594C7C31C986C2300706BF6 /* Defines.swift */; };
 		F594C7C61C986D0900706BF6 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F594C7C51C986D0900706BF6 /* Extensions.swift */; };
 /* End PBXBuildFile section */
@@ -34,6 +35,7 @@
 		9CEF80F41BBFC4EA007ECB47 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9CEF80F71BBFC4EA007ECB47 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9CEF80F91BBFC4EA007ECB47 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F51F83CF1CC0FEB900FB48A7 /* BaseViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
 		F594C7C31C986C2300706BF6 /* Defines.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Defines.swift; sourceTree = "<group>"; };
 		F594C7C51C986D0900706BF6 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -79,6 +81,7 @@
 				F594C7C31C986C2300706BF6 /* Defines.swift */,
 				F594C7C51C986D0900706BF6 /* Extensions.swift */,
 				9CEF80ED1BBFC4EA007ECB47 /* AppDelegate.swift */,
+				F51F83CF1CC0FEB900FB48A7 /* BaseViewModel.swift */,
 				9CEF811D1BBFCF1F007ECB47 /* Supporting Files */,
 			);
 			path = WhatsTheWeatherIn;
@@ -239,6 +242,7 @@
 				9C1D3FC31BD691D5007A2865 /* WeatherTableViewModel.swift in Sources */,
 				9CEF80EE1BBFC4EA007ECB47 /* AppDelegate.swift in Sources */,
 				9C1D3FC41BD691D5007A2865 /* WeatherTableTableViewController.swift in Sources */,
+				F51F83D01CC0FEB900FB48A7 /* BaseViewModel.swift in Sources */,
 				F594C7C61C986D0900706BF6 /* Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -35,10 +35,10 @@ class ForecastTableViewCell: UITableViewCell {
             }
             weatherMessageLabel.text = forecastToShow.description
 
-            dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) { () -> Void in
+            dispatchInGlobalQueue {
                 if let data = NSData(contentsOfURL: NSURL(string: Constants.baseImageURL + forecastToShow.imageID! + Constants.imageExtension)!) {
                     if let image = UIImage(data: data) {
-                        dispatch_async(dispatch_get_main_queue()) { self.weatherImageOutlet.image = image }
+                        self.dispatchInMainQueue { self.weatherImageOutlet.image = image }
                     }
                 }
             }

@@ -19,7 +19,22 @@ extension NSDate {
     }
 }
 
-public extension Response {
+extension NSObject {
+
+    func dispatchInMainQueue(closure: () -> Void) {
+        dispatch_async(dispatch_get_main_queue()) {
+            closure()
+        }
+    }
+
+    func dispatchInGlobalQueue(closure: () -> Void) {
+        dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) {
+            closure()
+        }
+    }
+}
+
+extension Response {
 
     public func mapObject<T: Mappable>() throws -> T {
         guard let object = Mapper<T>().map(try mapJSON()) else {
@@ -29,7 +44,7 @@ public extension Response {
     }
 }
 
-public extension ObservableType where E == Response {
+extension ObservableType where E == Response {
 
     public func mapObject<T: Mappable>(type: T.Type) -> Observable<T> {
         return observeOn(SerialDispatchQueueScheduler(globalConcurrentQueueQOS: .Background))
