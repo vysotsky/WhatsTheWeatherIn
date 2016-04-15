@@ -18,25 +18,18 @@ class ForecastTableViewCell: UITableViewCell {
     }
 
     @IBOutlet weak var dateLabel: UILabel!
-
     @IBOutlet weak var cityDegreesLabel: UILabel!
     @IBOutlet weak var weatherMessageLabel: UILabel!
     @IBOutlet weak var weatherImageOutlet: UIImageView!
 
-    func updateCell() {
+    private func updateCell() {
         if let forecastToShow = forecast {
-            let formatter = NSDateFormatter()
-            formatter.dateStyle = .MediumStyle
-            formatter.timeStyle = .ShortStyle
-            formatter.setLocalizedDateFormatFromTemplate("h a")
-            dateLabel.text = formatter.stringFromDate(forecastToShow.date!)
-
+            dateLabel.text = forecastToShow.date!.hoursString
             if let temp = forecastToShow.temp {
                 cityDegreesLabel.text = "\(temp)°C"
             }
             weatherMessageLabel.text = forecastToShow.description
-            
-            self.weatherImageOutlet.sd_setImageWithURL(NSURL(string: Constants.baseImageURL + forecastToShow.imageID! + Constants.imageExtension)!)
+            weatherImageOutlet.sd_setImageWithURL(NSURL(string: Constants.baseImageURL + forecastToShow.imageID! + Constants.imageExtension)!)
         }
     }
 
@@ -45,7 +38,4 @@ class ForecastTableViewCell: UITableViewCell {
         updateCell()
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-    }
 }

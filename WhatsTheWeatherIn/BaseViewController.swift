@@ -11,8 +11,7 @@ import RxSwift
 import SDWebImage
 
 class BaseTableViewController: UITableViewController {
-
-    var boundToViewModel = false
+    
     let disposeBag = DisposeBag()
 
     internal func bindSourceToLabel(source: PublishSubject<String?>, label: UILabel) {
@@ -34,7 +33,12 @@ class BaseTableViewController: UITableViewController {
     internal func bindSourceToImageView(source: PublishSubject<NSURL?>, imageView: UIImageView) {
         source
             .subscribeNext { url in
-                self.dispatchInMainQueue { imageView.sd_setImageWithURL(url!, placeholderImage: nil, options: [.RefreshCached]) }
+                self.dispatchInMainQueue { if let url = url {
+                    imageView.sd_setImageWithURL(url, placeholderImage: nil, options: [.RefreshCached])
+                    } else {
+                    imageView.image = nil
+                    }
+                }
         }
             .addDisposableTo(disposeBag)
     }

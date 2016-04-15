@@ -17,7 +17,6 @@ import ObjectMapper
 class WeatherTableViewModel: BaseViewModel<WeatherEntity, String> {
 
     // MARK: Model
-
     var weather: WeatherEntity? {
         didSet {
             if weather?.cityName != nil {
@@ -26,8 +25,7 @@ class WeatherTableViewModel: BaseViewModel<WeatherEntity, String> {
         }
     }
 
-    // MARK: UI
-
+    // MARK: UI Subjects
     var cityName = PublishSubject<String?>()
     var degrees = PublishSubject<String?>()
     var weatherDescription = PublishSubject<String?>()
@@ -35,6 +33,7 @@ class WeatherTableViewModel: BaseViewModel<WeatherEntity, String> {
     var backgroundImage = PublishSubject<UIImage?>()
     var tableViewData = PublishSubject<Array<WeatherContainer>?>()
 
+    // MARK: Updating
     override func notifyDataChanged() {
         cityName.on(.Next(weather?.cityName))
         if let temp = weather?.currentWeather?.temp {
@@ -46,37 +45,42 @@ class WeatherTableViewModel: BaseViewModel<WeatherEntity, String> {
             tableViewData.on(.Next(currentForecast.categorise { $0.date!.dayString }.map { WeatherContainer(title: $0.0, data: $0.1) }))
         }
     }
-    
-    override func updateForData(data: WeatherEntity?) {
+
+    override internal func updateForData(data: WeatherEntity?) {
         self.weather = data
     }
+
+    override internal func updateForError(error: String?) {
+    }
     
-    override func updateForError(error: String?) {
+    override internal func updateForEmptyState() {
+        cityName.on(.Next(nil))
+        degrees.on(.Next(nil))
+        weatherDescription.on(.Next(nil))
+        weatherImage.on(.Next(nil))
+        tableViewData.on(.Next(nil))
     }
 
     // MARK: Weather fetching
-
     var searchText: String? {
         didSet {
-            if let cityName = searchText {
-                getWeatherForRequest(cityName)
-            } 
-        }
-    }
-
-    func getWeatherForRequest(cityName: String) {
-        Providers.WeatherProvider.request(Weather.Data(cityName))
-            .mapObject(WeatherEntity)
-            .subscribe { event -> Void in
-                switch event {
-                case .Next(let result):
-                    self.updateForData(result)
-                case .Error(_):
-                    self.updateForError("Error")
-                case .Completed:
-                    break
+            if let cityName = searchText where cityName != ""  {
+                Providers.WeatherProvider.request(Weather.Data(cityName))
+                    .mapObject(WeatherEntity)
+                    .subscribe { event -> Void in
+                        switch event {
+                        case .Next(let result):
+                            self.updateForData(result)
+                        case .Error(_):
+                            self.updateForError("error")
+                        case .Completed:
+                            break
+                        }
                 }
+                    .addDisposableTo(disposeBag)
+            } else {
+                updateForEmptyState()
+            }
         }
-        .addDisposableTo(disposeBag)
     }
 }

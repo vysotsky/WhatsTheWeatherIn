@@ -15,7 +15,6 @@ import Alamofire
 class WeatherTableViewController: BaseTableViewController, UIAlertViewDelegate {
 
     // MARK: Outlets
-
     @IBOutlet weak var cityTextField: UITextField!
     @IBOutlet weak var cityNameLabel: UILabel!
     @IBOutlet weak var cityDegreesLabel: UILabel!
@@ -23,11 +22,12 @@ class WeatherTableViewController: BaseTableViewController, UIAlertViewDelegate {
     @IBOutlet weak var cityImage: UIImageView!
 
     // MARK: Lifecycle
+    
     var viewModel = WeatherTableViewModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+       
         cityTextField.rx_text
             .debounce(0.3, scheduler: MainScheduler.instance)
             .subscribeNext { searchText in
@@ -40,12 +40,13 @@ class WeatherTableViewController: BaseTableViewController, UIAlertViewDelegate {
         bindSourceToLabel(viewModel.weatherDescription, label: weatherMessageLabel)
         bindSourceToImageView(viewModel.weatherImage, imageView: cityImage)
         bindSourceToHandler(viewModel.tableViewData) { data in
-                self.tableViewData = data
+            self.tableViewData = data
         }
+
+        viewModel.boundToViewController = true
     }
 
     // MARK: Table view data source
-
     var tableViewData: Array<WeatherContainer>? {
         didSet {
             self.tableView.reloadData()

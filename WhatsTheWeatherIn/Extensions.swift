@@ -17,6 +17,14 @@ extension NSDate {
         formatter.setLocalizedDateFormatFromTemplate("d M")
         return formatter.stringFromDate(self)
     }
+
+    var hoursString: String {
+        let formatter = NSDateFormatter()
+        formatter.dateStyle = .MediumStyle
+        formatter.timeStyle = .ShortStyle
+        formatter.setLocalizedDateFormatFromTemplate("h a")
+        return formatter.stringFromDate(self)
+    }
 }
 
 extension NSObject {

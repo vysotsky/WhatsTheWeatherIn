@@ -10,22 +10,34 @@ import Foundation
 import RxSwift
 
 class BaseViewModel<T, E>: NSObject {
-    
+
+    var boundToViewController = false {
+        didSet {
+            if boundToViewController {
+                updateForEmptyState()
+            }
+        }
+    }
+
     var disposeBag = DisposeBag()
-    
+
     internal func notifyDataChanged() {
     }
-    
-    func updateForData(data: T?) {
+
+    internal func updateForData(data: T?) {
+    }
+
+    internal func updateForError(error: E?) {
+    }
+
+    internal func updateForCompleted() {
+    }
+
+    internal func updateForEmptyState() {
     }
     
-    func updateForError(error: E?) {
-    }
-    
-    func updateForCompleted() {
-    }
-    
-    func updateForEmptyState() {
-    }
-    
+}
+
+enum ViewModelError: ErrorType {
+    case ViewModelIsNotInitialized
 }
