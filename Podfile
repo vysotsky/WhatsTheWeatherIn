@@ -9,4 +9,5 @@ target 'WhatsTheWeatherIn' do
     pod 'Moya'
     pod 'Moya/RxSwift'
     pod 'ObjectMapper'
+    pod 'SDWebImage', '~>3.7'
 end

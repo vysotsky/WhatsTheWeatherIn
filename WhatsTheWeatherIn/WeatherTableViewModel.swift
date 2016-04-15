@@ -34,7 +34,7 @@ class WeatherTableViewModel: BaseViewModel {
     var degrees = PublishSubject<String?>()
     var weatherDescription = PublishSubject<String?>()
     private var forecast: [WeatherForecastEntity]?
-    var weatherImage = PublishSubject<UIImage?>()
+    var weatherImage = PublishSubject<NSURL?>()
     var backgroundImage = PublishSubject<UIImage?>()
     var tableViewData = PublishSubject <[(String, [WeatherForecastEntity])]>()
     var errorAlertController = PublishSubject<UIAlertController>()
@@ -45,22 +45,10 @@ class WeatherTableViewModel: BaseViewModel {
             degrees.on(.Next(String(temp)))
         }
         weatherDescription.on(.Next(weather?.currentWeather?.description))
-        if let id = weather?.currentWeather?.imageID {
-            setWeatherImageForImageID(id)
-        }
+        weatherImage.on(.Next(NSURL(string: "https://unsplash.it/800/600/?random")))
         forecast = weather?.forecast
         if forecast != nil {
             sendTableViewData()
-        }
-    }
-
-    func setWeatherImageForImageID(imageID: String) {
-        dispatchInGlobalQueue {
-            if let url = NSURL(string: Constants.baseImageURL + imageID + Constants.imageExtension) {
-                if let data = NSData(contentsOfURL: url) {
-                    self.dispatchInMainQueue { self.weatherImage.on(.Next(UIImage(data: data))) }
-                }
-            }
         }
     }
 

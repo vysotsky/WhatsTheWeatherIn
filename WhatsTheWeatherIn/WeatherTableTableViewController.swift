@@ -32,7 +32,7 @@ class WeatherTableViewController: UITableViewController, UIAlertViewDelegate {
     @IBOutlet weak var cityNameLabel: UILabel!
     @IBOutlet weak var cityDegreesLabel: UILabel!
     @IBOutlet weak var weatherMessageLabel: UILabel!
-    @IBOutlet weak var weatherImageOutlet: UIImageView!
+    @IBOutlet weak var cityImage: UIImageView!
     @IBOutlet weak var backgroundImageOutlet: UIImageView!
 
     var alertController: UIAlertController? {
@@ -62,8 +62,8 @@ class WeatherTableViewController: UITableViewController, UIAlertViewDelegate {
         bindSourceToLabel(viewModel.weatherDescription, label: weatherMessageLabel)
 
         viewModel.weatherImage
-            .subscribeNext { image in
-                self.weatherImageOutlet.image = image
+            .subscribeNext { url in
+                self.cityImage.sd_setImageWithURL(url!, placeholderImage: nil, options: [.RefreshCached])
         }
             .addDisposableTo(disposeBag)
 

@@ -26,12 +26,6 @@ extension NSObject {
             closure()
         }
     }
-
-    func dispatchInGlobalQueue(closure: () -> Void) {
-        dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) {
-            closure()
-        }
-    }
 }
 
 extension Response {

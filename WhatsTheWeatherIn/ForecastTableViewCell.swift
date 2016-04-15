@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class ForecastTableViewCell: UITableViewCell {
 
@@ -34,14 +35,8 @@ class ForecastTableViewCell: UITableViewCell {
                 cityDegreesLabel.text = "\(temp)°C"
             }
             weatherMessageLabel.text = forecastToShow.description
-
-            dispatchInGlobalQueue {
-                if let data = NSData(contentsOfURL: NSURL(string: Constants.baseImageURL + forecastToShow.imageID! + Constants.imageExtension)!) {
-                    if let image = UIImage(data: data) {
-                        self.dispatchInMainQueue { self.weatherImageOutlet.image = image }
-                    }
-                }
-            }
+            
+            self.weatherImageOutlet.sd_setImageWithURL(NSURL(string: Constants.baseImageURL + forecastToShow.imageID! + Constants.imageExtension)!)
         }
     }
 
