@@ -14,7 +14,7 @@ import RxSwift
 import Moya
 import ObjectMapper
 
-class MVVMWeatherTableViewModel {
+class WeatherTableViewModel {
 
     var disposeBag = DisposeBag()
 

@@ -12,7 +12,7 @@ import RxCocoa
 import RxSwift
 import Alamofire
 
-class MVVMWeatherTableViewController: UITableViewController, UIAlertViewDelegate {
+class WeatherTableViewController: UITableViewController, UIAlertViewDelegate {
 
     let disposeBag = DisposeBag()
 
@@ -45,15 +45,11 @@ class MVVMWeatherTableViewController: UITableViewController, UIAlertViewDelegate
         }
     }
 
-    @IBOutlet weak var weatherView: UIView! {
-        didSet {
-            weatherView.bounds.size = UIScreen.mainScreen().bounds.size
-        }
-    }
+    @IBOutlet weak var weatherView: UIView!
 
     // MARK: Lifecycle
 
-    var viewModel = MVVMWeatherTableViewModel()
+    var viewModel = WeatherTableViewModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
