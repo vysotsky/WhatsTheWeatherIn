@@ -14,16 +14,14 @@ import RxSwift
 import Moya
 import ObjectMapper
 
-class WeatherTableViewModel: BaseViewModel {
-
-    var disposeBag = DisposeBag()
+class WeatherTableViewModel: BaseViewModel<WeatherEntity, String> {
 
     // MARK: Model
 
     var weather: WeatherEntity? {
         didSet {
             if weather?.cityName != nil {
-                updateModel()
+                notifyDataChanged()
             }
         }
     }
@@ -33,44 +31,27 @@ class WeatherTableViewModel: BaseViewModel {
     var cityName = PublishSubject<String?>()
     var degrees = PublishSubject<String?>()
     var weatherDescription = PublishSubject<String?>()
-    private var forecast: [WeatherForecastEntity]?
     var weatherImage = PublishSubject<NSURL?>()
     var backgroundImage = PublishSubject<UIImage?>()
-    var tableViewData = PublishSubject <[(String, [WeatherForecastEntity])]>()
-    var errorAlertController = PublishSubject<UIAlertController>()
+    var tableViewData = PublishSubject<Array<WeatherContainer>?>()
 
-    func updateModel() {
+    override func notifyDataChanged() {
         cityName.on(.Next(weather?.cityName))
         if let temp = weather?.currentWeather?.temp {
             degrees.on(.Next(String(temp)))
         }
         weatherDescription.on(.Next(weather?.currentWeather?.description))
         weatherImage.on(.Next(NSURL(string: "https://unsplash.it/800/600/?random")))
-        forecast = weather?.forecast
-        if forecast != nil {
-            sendTableViewData()
+        if let currentForecast = weather?.forecast {
+            tableViewData.on(.Next(currentForecast.categorise { $0.date!.dayString }.map { WeatherContainer(title: $0.0, data: $0.1) }))
         }
     }
-
-    func sendTableViewData() {
-        if let currentForecast = forecast {
-
-            var forecasts = [[WeatherForecastEntity]]()
-            var days = [String]()
-            days.append(NSDate(timeIntervalSinceNow: 0).dayString)
-            var tempForecasts = [WeatherForecastEntity]()
-            for forecast in currentForecast {
-                if days.contains(forecast.date!.dayString) {
-                    tempForecasts.append(forecast)
-                } else {
-                    days.append(forecast.date!.dayString)
-                    forecasts.append(tempForecasts)
-                    tempForecasts.removeAll()
-                    tempForecasts.append(forecast)
-                }
-            }
-            tableViewData.on(.Next(Array(zip(days, forecasts))))
-        }
+    
+    override func updateForData(data: WeatherEntity?) {
+        self.weather = data
+    }
+    
+    override func updateForError(error: String?) {
     }
 
     // MARK: Weather fetching
@@ -79,7 +60,7 @@ class WeatherTableViewModel: BaseViewModel {
         didSet {
             if let cityName = searchText {
                 getWeatherForRequest(cityName)
-            }
+            } 
         }
     }
 
@@ -89,13 +70,13 @@ class WeatherTableViewModel: BaseViewModel {
             .subscribe { event -> Void in
                 switch event {
                 case .Next(let result):
-                    self.weather = result
+                    self.updateForData(result)
                 case .Error(_):
-                    break
-                default:
+                    self.updateForError("Error")
+                case .Completed:
                     break
                 }
         }
-            .addDisposableTo(disposeBag)
+        .addDisposableTo(disposeBag)
     }
 }

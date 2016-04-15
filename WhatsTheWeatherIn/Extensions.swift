@@ -28,6 +28,18 @@ extension NSObject {
     }
 }
 
+public extension SequenceType {
+
+    func categorise<U : Hashable>(@noescape fun: Generator.Element -> U) -> Dictionary<U, [Generator.Element]> {
+        var dict: [U: [Generator.Element]] = [:]
+        for element in self {
+            let key = fun(element)
+            if case nil = dict[key]?.append(element) { dict[key] = [element] }
+        }
+        return dict
+    }
+}
+
 extension Response {
 
     public func mapObject<T: Mappable>() throws -> T {

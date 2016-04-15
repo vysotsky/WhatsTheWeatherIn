@@ -19,6 +19,8 @@
 		F51F83D01CC0FEB900FB48A7 /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F51F83CF1CC0FEB900FB48A7 /* BaseViewModel.swift */; };
 		F594C7C41C986C2300706BF6 /* Defines.swift in Sources */ = {isa = PBXBuildFile; fileRef = F594C7C31C986C2300706BF6 /* Defines.swift */; };
 		F594C7C61C986D0900706BF6 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F594C7C51C986D0900706BF6 /* Extensions.swift */; };
+		F5EE7EB01CC135DF00DF92B3 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5EE7EAF1CC135DF00DF92B3 /* BaseViewController.swift */; };
+		F5EE7EB21CC13A7B00DF92B3 /* WeatherContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5EE7EB11CC13A7B00DF92B3 /* WeatherContainer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +40,8 @@
 		F51F83CF1CC0FEB900FB48A7 /* BaseViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
 		F594C7C31C986C2300706BF6 /* Defines.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Defines.swift; sourceTree = "<group>"; };
 		F594C7C51C986D0900706BF6 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		F5EE7EAF1CC135DF00DF92B3 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		F5EE7EB11CC13A7B00DF92B3 /* WeatherContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherContainer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +86,8 @@
 				F594C7C51C986D0900706BF6 /* Extensions.swift */,
 				9CEF80ED1BBFC4EA007ECB47 /* AppDelegate.swift */,
 				F51F83CF1CC0FEB900FB48A7 /* BaseViewModel.swift */,
+				F5EE7EAF1CC135DF00DF92B3 /* BaseViewController.swift */,
+				F5EE7EB11CC13A7B00DF92B3 /* WeatherContainer.swift */,
 				9CEF811D1BBFCF1F007ECB47 /* Supporting Files */,
 			);
 			path = WhatsTheWeatherIn;
@@ -241,6 +247,8 @@
 				F594C7C41C986C2300706BF6 /* Defines.swift in Sources */,
 				9C1D3FC31BD691D5007A2865 /* WeatherTableViewModel.swift in Sources */,
 				9CEF80EE1BBFC4EA007ECB47 /* AppDelegate.swift in Sources */,
+				F5EE7EB01CC135DF00DF92B3 /* BaseViewController.swift in Sources */,
+				F5EE7EB21CC13A7B00DF92B3 /* WeatherContainer.swift in Sources */,
 				9C1D3FC41BD691D5007A2865 /* WeatherTableTableViewController.swift in Sources */,
 				F51F83D01CC0FEB900FB48A7 /* BaseViewModel.swift in Sources */,
 				F594C7C61C986D0900706BF6 /* Extensions.swift in Sources */,

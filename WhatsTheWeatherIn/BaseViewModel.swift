@@ -7,6 +7,25 @@
 //
 
 import Foundation
+import RxSwift
 
-class BaseViewModel: NSObject {
+class BaseViewModel<T, E>: NSObject {
+    
+    var disposeBag = DisposeBag()
+    
+    internal func notifyDataChanged() {
+    }
+    
+    func updateForData(data: T?) {
+    }
+    
+    func updateForError(error: E?) {
+    }
+    
+    func updateForCompleted() {
+    }
+    
+    func updateForEmptyState() {
+    }
+    
 }
