@@ -37,7 +37,3 @@ class BaseViewModel<T, E>: NSObject {
     }
     
 }
-
-enum ViewModelError: ErrorType {
-    case ViewModelIsNotInitialized
-}

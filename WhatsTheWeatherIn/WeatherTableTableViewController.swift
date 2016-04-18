@@ -22,12 +22,12 @@ class WeatherTableViewController: BaseTableViewController, UIAlertViewDelegate {
     @IBOutlet weak var cityImage: UIImageView!
 
     // MARK: Lifecycle
-    
+
     var viewModel = WeatherTableViewModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-       
+
         cityTextField.rx_text
             .debounce(0.3, scheduler: MainScheduler.instance)
             .subscribeNext { searchText in
@@ -47,7 +47,7 @@ class WeatherTableViewController: BaseTableViewController, UIAlertViewDelegate {
     }
 
     // MARK: Table view data source
-    var tableViewData: Array<WeatherContainer>? {
+    var tableViewData: Array<WeatherTableViewContainer>? {
         didSet {
             self.tableView.reloadData()
         }
@@ -66,9 +66,9 @@ class WeatherTableViewController: BaseTableViewController, UIAlertViewDelegate {
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> ForecastTableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("forecastCell", forIndexPath: indexPath) as? ForecastTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("forecastCell", forIndexPath: indexPath) as! ForecastTableViewCell
 
-        cell!.forecast = tableViewData == nil ? nil : tableViewData![indexPath.section].data[indexPath.row]
-        return cell!
+        cell.forecast = tableViewData == nil ? nil : tableViewData![indexPath.section].data[indexPath.row]
+        return cell
     }
 }

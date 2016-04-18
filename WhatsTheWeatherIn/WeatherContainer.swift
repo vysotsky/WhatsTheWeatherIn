@@ -8,12 +8,12 @@
 
 import Foundation
 
-struct WeatherContainer {
+struct WeatherTableViewContainer {
 
     var title: String
-    var data: [WeatherForecastEntity]
+    var data: [ForecastEntity]
 
-    init(title: String, data: [WeatherForecastEntity]) {
+    init(title: String, data: [ForecastEntity]) {
         self.title = title
         self.data = data
     }

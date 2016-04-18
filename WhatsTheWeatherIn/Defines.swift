@@ -18,5 +18,5 @@ struct Constants {
 }
 
 struct Providers {
-    static let WeatherProvider = RxMoyaProvider<Weather>()
+    static let WeatherProvider = RxMoyaProvider<WeatherService>()
 }

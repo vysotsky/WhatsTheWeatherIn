@@ -11,7 +11,7 @@ import SDWebImage
 
 class ForecastTableViewCell: UITableViewCell {
 
-    var forecast: WeatherForecastEntity? {
+    var forecast: ForecastEntity? {
         didSet {
             updateCell()
         }
@@ -37,5 +37,4 @@ class ForecastTableViewCell: UITableViewCell {
         super.awakeFromNib()
         updateCell()
     }
-
 }

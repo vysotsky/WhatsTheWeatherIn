@@ -31,7 +31,7 @@ class WeatherTableViewModel: BaseViewModel<WeatherEntity, String> {
     var weatherDescription = PublishSubject<String?>()
     var weatherImage = PublishSubject<NSURL?>()
     var backgroundImage = PublishSubject<UIImage?>()
-    var tableViewData = PublishSubject<Array<WeatherContainer>?>()
+    var tableViewData = PublishSubject<Array<WeatherTableViewContainer>?>()
 
     // MARK: Updating
     override func notifyDataChanged() {
@@ -42,7 +42,7 @@ class WeatherTableViewModel: BaseViewModel<WeatherEntity, String> {
         weatherDescription.on(.Next(weather?.currentWeather?.description))
         weatherImage.on(.Next(NSURL(string: "https://unsplash.it/800/600/?random")))
         if let currentForecast = weather?.forecast {
-            tableViewData.on(.Next(currentForecast.categorise { $0.date!.dayString }.map { WeatherContainer(title: $0.0, data: $0.1) }))
+            tableViewData.on(.Next(currentForecast.categorise { $0.date!.dayString }.map { WeatherTableViewContainer(title: $0.0, data: $0.1) }))
         }
     }
 
@@ -52,7 +52,7 @@ class WeatherTableViewModel: BaseViewModel<WeatherEntity, String> {
 
     override internal func updateForError(error: String?) {
     }
-    
+
     override internal func updateForEmptyState() {
         cityName.on(.Next(nil))
         degrees.on(.Next(nil))
@@ -64,8 +64,8 @@ class WeatherTableViewModel: BaseViewModel<WeatherEntity, String> {
     // MARK: Weather fetching
     var searchText: String? {
         didSet {
-            if let cityName = searchText where cityName != ""  {
-                Providers.WeatherProvider.request(Weather.Data(cityName))
+            if let cityName = searchText where cityName != "" {
+                Providers.WeatherProvider.request(WeatherService.Data(cityName))
                     .mapObject(WeatherEntity)
                     .subscribe { event -> Void in
                         switch event {
