@@ -16,7 +16,3 @@ struct Constants {
     static let baseImageURL = "http://openweathermap.org/img/w/"
     static let imageExtension = ".png"
 }
-
-struct Providers {
-    static let WeatherProvider = RxMoyaProvider<WeatherService>()
-}

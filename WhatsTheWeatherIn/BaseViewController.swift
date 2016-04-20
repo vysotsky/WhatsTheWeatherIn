@@ -35,8 +35,8 @@ class BaseTableViewController: UITableViewController {
             .subscribeNext { url in
                 self.dispatchInMainQueue {
                     if let url = url {
-                        let imageLoader = AppDelegate.sharedInstance.container.resolve(ImageLoaderType.self)!
-                        imageLoader.loadImageTo(imageView, onUrl: url)
+                        let imageLoader = AppDelegate.resolve(ImageLoaderType.self)
+                        imageLoader.loadImageTo(imageView, url: url)
                     } else {
                         imageView.image = nil
                     }

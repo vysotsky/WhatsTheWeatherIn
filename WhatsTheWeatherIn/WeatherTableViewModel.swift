@@ -15,6 +15,16 @@ import Moya
 import ObjectMapper
 
 class WeatherTableViewModel: BaseViewModel<WeatherEntity, String> {
+    
+    override class var name: String! {
+        get {
+            return "weather_table_view_model"
+        }
+    }
+
+    lazy var networkManager = {
+        return AppDelegate.resolve(NetworkManagerType.self)
+    }()
 
     // MARK: Model
     var weather: WeatherEntity? {
@@ -65,8 +75,7 @@ class WeatherTableViewModel: BaseViewModel<WeatherEntity, String> {
     var searchText: String? {
         didSet {
             if let cityName = searchText where cityName != "" {
-                Providers.WeatherProvider.request(WeatherService.Data(cityName))
-                    .mapObject(WeatherEntity)
+                networkManager.requestWeatherForCity(cityName)
                     .subscribe { event -> Void in
                         switch event {
                         case .Next(let result):
