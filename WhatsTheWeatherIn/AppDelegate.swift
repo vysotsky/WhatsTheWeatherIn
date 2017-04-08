@@ -8,6 +8,7 @@
 
 import UIKit
 import Swinject
+import SwinjectStoryboard
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -19,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         container.register(ViewModelType.self, name: WeatherTableViewModel.name) { _ in WeatherTableViewModel() }
 
-        container.registerForStoryboard(WeatherTableViewController.self) { r, c in
+        container.storyboardInitCompleted(WeatherTableViewController.self) { r, c in
             c.viewModel = r.resolve(ViewModelType.self, name: WeatherTableViewModel.name) as! WeatherTableViewModel
         }
 
@@ -30,9 +31,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return container
     }()
 
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
-        let window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        let window = UIWindow(frame: UIScreen.main.bounds)
         window.makeKeyAndVisible()
         self.window = window
 
@@ -44,11 +45,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     class var sharedInstance: AppDelegate {
         get {
-            return UIApplication.sharedApplication().delegate as! AppDelegate
+            return UIApplication.shared.delegate as! AppDelegate
         }
     }
 
-    class func resolve<ObjectType>(type: ObjectType.Type) -> ObjectType {
+    class func resolve<ObjectType>(_ type: ObjectType.Type) -> ObjectType {
         return sharedInstance.container.resolve(type)!
     }
 }

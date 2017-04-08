@@ -10,23 +10,23 @@ import UIKit
 import AlamofireImage
 
 protocol ImageLoaderType {
-    func loadImageTo(imageView: UIImageView, url: NSURL)
+    func loadImageTo(_ imageView: UIImageView, url: URL)
 }
 
 class SDWebImageLoader: ImageLoaderType {
     
-    func loadImageTo(imageView: UIImageView, url: NSURL) {
-        imageView.sd_setImageWithURL(url, placeholderImage: nil, options: [.RefreshCached])
+    func loadImageTo(_ imageView: UIImageView, url: URL) {
+        imageView.sd_setImage(with: url, placeholderImage: nil, options: [.refreshCached])
     }
     
 }
 
 class NativeWebImageLoader: ImageLoaderType {
     
-    func loadImageTo(imageView: UIImageView, url: NSURL) {
-        dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) {
-            if let data = NSData(contentsOfURL: url) {
-                dispatch_async(dispatch_get_main_queue()) {
+    func loadImageTo(_ imageView: UIImageView, url: URL) {
+        DispatchQueue.global(qos: DispatchQoS.QoSClass.userInitiated).async {
+            if let data = try? Data(contentsOf: url) {
+                DispatchQueue.main.async {
                     imageView.image = UIImage(data: data)
                 }
             }
@@ -37,8 +37,8 @@ class NativeWebImageLoader: ImageLoaderType {
 
 class AlamofireImageLoader: ImageLoaderType {
 
-    func loadImageTo(imageView: UIImageView, url: NSURL) {
-        imageView.af_setImageWithURL(url)
+    func loadImageTo(_ imageView: UIImageView, url: URL) {
+        imageView.af_setImage(withURL: url)
     }
     
 }

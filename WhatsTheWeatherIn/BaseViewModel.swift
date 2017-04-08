@@ -30,10 +30,10 @@ class BaseViewModel<T, E>: NSObject, ViewModelType {
     internal func notifyDataChanged() {
     }
 
-    internal func updateForData(data: T?) {
+    internal func updateForData(_ data: T?) {
     }
 
-    internal func updateForError(error: E?) {
+    internal func updateForError(_ error: E?) {
     }
 
     internal func updateForCompleted() {

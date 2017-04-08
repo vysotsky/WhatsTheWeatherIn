@@ -28,11 +28,11 @@ class WeatherTableViewController: BaseTableViewController, UIAlertViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        cityTextField.rx_text
+        cityTextField.rx.text
             .debounce(0.3, scheduler: MainScheduler.instance)
-            .subscribeNext { searchText in
+            .subscribe(onNext: { searchText in
                 self.viewModel.searchText = searchText
-        }
+        })
             .addDisposableTo(disposeBag)
 
         bindSourceToLabel(viewModel.cityName, label: cityNameLabel)
@@ -53,20 +53,20 @@ class WeatherTableViewController: BaseTableViewController, UIAlertViewDelegate {
         }
     }
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return tableViewData == nil ? 0 : tableViewData!.count
     }
 
-    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return tableViewData?[section].title
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tableViewData == nil ? 0 : tableViewData![section].data.count
     }
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> ForecastTableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("forecastCell", forIndexPath: indexPath) as! ForecastTableViewCell
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> ForecastTableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "forecastCell", for: indexPath) as! ForecastTableViewCell
 
         cell.forecast = tableViewData == nil ? nil : tableViewData![indexPath.section].data[indexPath.row]
         return cell

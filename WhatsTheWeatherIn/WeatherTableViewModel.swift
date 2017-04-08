@@ -39,50 +39,50 @@ class WeatherTableViewModel: BaseViewModel<WeatherEntity, String> {
     var cityName = PublishSubject<String?>()
     var degrees = PublishSubject<String?>()
     var weatherDescription = PublishSubject<String?>()
-    var weatherImage = PublishSubject<NSURL?>()
+    var weatherImage = PublishSubject<URL?>()
     var backgroundImage = PublishSubject<UIImage?>()
     var tableViewData = PublishSubject<Array<WeatherTableViewContainer>?>()
 
     // MARK: Updating
     override func notifyDataChanged() {
-        cityName.on(.Next(weather?.cityName))
+        cityName.on(.next(weather?.cityName))
         if let temp = weather?.currentWeather?.temp {
-            degrees.on(.Next(String(temp)))
+            degrees.on(.next(String(temp)))
         }
-        weatherDescription.on(.Next(weather?.currentWeather?.description))
-        weatherImage.on(.Next(NSURL(string: "https://unsplash.it/800/600/?random")))
+        weatherDescription.on(.next(weather?.currentWeather?.description))
+        weatherImage.on(.next(URL(string: "https://unsplash.it/800/600/?random")))
         if let currentForecast = weather?.forecast {
-            tableViewData.on(.Next(currentForecast.categorise { $0.date!.dayString }.map { WeatherTableViewContainer(title: $0.0, data: $0.1) }))
+            tableViewData.on(.next(currentForecast.categorise { $0.date!.dayString }.map { WeatherTableViewContainer(title: $0.0, data: $0.1) }))
         }
     }
 
-    override internal func updateForData(data: WeatherEntity?) {
+    override internal func updateForData(_ data: WeatherEntity?) {
         self.weather = data
     }
 
-    override internal func updateForError(error: String?) {
+    override internal func updateForError(_ error: String?) {
     }
 
     override internal func updateForEmptyState() {
-        cityName.on(.Next(nil))
-        degrees.on(.Next(nil))
-        weatherDescription.on(.Next(nil))
-        weatherImage.on(.Next(nil))
-        tableViewData.on(.Next(nil))
+        cityName.on(.next(nil))
+        degrees.on(.next(nil))
+        weatherDescription.on(.next(nil))
+        weatherImage.on(.next(nil))
+        tableViewData.on(.next(nil))
     }
 
     // MARK: Weather fetching
     var searchText: String? {
         didSet {
-            if let cityName = searchText where cityName != "" {
+            if let cityName = searchText, cityName != "" {
                 networkManager.requestWeatherForCity(cityName)
                     .subscribe { event -> Void in
                         switch event {
-                        case .Next(let result):
+                        case .next(let result):
                             self.updateForData(result)
-                        case .Error(_):
+                        case .error(_):
                             self.updateForError("error")
-                        case .Completed:
+                        case .completed:
                             break
                         }
                 }

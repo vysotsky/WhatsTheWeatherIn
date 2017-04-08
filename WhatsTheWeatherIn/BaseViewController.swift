@@ -14,25 +14,25 @@ class BaseTableViewController: UITableViewController {
 
     var disposeBag = DisposeBag()
 
-    internal func bindSourceToLabel(source: PublishSubject<String?>, label: UILabel) {
+    internal func bindSourceToLabel(_ source: PublishSubject<String?>, label: UILabel) {
         source
-            .subscribeNext { text in
+            .subscribe(onNext: { text in
                 self.dispatchInMainQueue { label.text = text }
-        }
+            })
             .addDisposableTo(disposeBag)
     }
 
-    internal func bindSourceToImageView(source: PublishSubject<UIImage?>, imageView: UIImageView) {
+    internal func bindSourceToImageView(_ source: PublishSubject<UIImage?>, imageView: UIImageView) {
         source
-            .subscribeNext { image in
+               .subscribe(onNext: {  image in
                 self.dispatchInMainQueue { imageView.image = image }
-        }
+        })
             .addDisposableTo(disposeBag)
     }
 
-    internal func bindSourceToImageView(source: PublishSubject<NSURL?>, imageView: UIImageView) {
+    internal func bindSourceToImageView(_ source: PublishSubject<URL?>, imageView: UIImageView) {
         source
-            .subscribeNext { url in
+            .subscribe(onNext: {  url in
                 self.dispatchInMainQueue {
                     if let url = url {
                         let imageLoader = AppDelegate.resolve(ImageLoaderType.self)
@@ -41,15 +41,15 @@ class BaseTableViewController: UITableViewController {
                         imageView.image = nil
                     }
                 }
-        }
+        })
             .addDisposableTo(disposeBag)
     }
 
-    internal func bindSourceToHandler<U>(source: PublishSubject<U?>, handler: U? -> Void) {
+    internal func bindSourceToHandler<U>(_ source: PublishSubject<U?>, handler: @escaping (U?) -> Void) {
         source
-            .subscribeNext { data in
+             .subscribe(onNext: { data in
                 self.dispatchInMainQueue { handler(data) }
-        }
+        })
             .addDisposableTo(disposeBag)
     }
 }

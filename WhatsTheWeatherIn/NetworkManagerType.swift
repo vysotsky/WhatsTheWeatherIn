@@ -13,24 +13,29 @@ import ObjectMapper
 protocol NetworkManagerType {
     var config: NetworkConfigType! { get }
     
-    func requestWeatherForCity(city: String) -> Observable<WeatherEntity>
+    func requestWeatherForCity(_ city: String) -> Observable<WeatherEntity?>
 }
 
 class MoyaNetworkManager: NetworkManagerType {
     
     var config: NetworkConfigType!
+    let mapper = Mapper<WeatherEntity>()
     
-    private lazy var provider = {
-        return RxMoyaProvider<WeatherService>()
+    fileprivate lazy var provider: RxMoyaProvider<WeatherService> = {
+        RxMoyaProvider<WeatherService>()
     }()
  
     init(config: NetworkConfigType) {
         self.config = config
     }
 
-    func requestWeatherForCity(city: String) -> Observable<WeatherEntity> {
-       return provider.request(WeatherService.Data(city))
-            .mapObject(WeatherEntity)
+    func requestWeatherForCity(_ city: String) -> Observable<WeatherEntity?> {
+        return provider.request(WeatherService.data(city)).map({ response in
+            guard let mapped = self.mapper.map(JSON: try JSONSerialization.jsonObject(with: response.data, options: .allowFragments) as! [String : Any]) else {
+                return nil
+            }
+            return mapped
+        })
     }
     
 }

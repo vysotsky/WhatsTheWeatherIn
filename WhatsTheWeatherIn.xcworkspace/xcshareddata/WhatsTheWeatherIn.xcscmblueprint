@@ -10,7 +10,7 @@
   "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "C2795601-3AE0-4CAE-8F51-84D048177D68",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
     "62C0BF5F66328B65070EAF3082C70F062972A432" : "",
-    "D42A2F1371F1B1C1716BA114D1D02A1A968BBDBF" : "ReactiveWeatherExample\/"
+    "D42A2F1371F1B1C1716BA114D1D02A1A968BBDBF" : "weather\/"
   },
   "DVTSourceControlWorkspaceBlueprintNameKey" : "WhatsTheWeatherIn",
   "DVTSourceControlWorkspaceBlueprintVersion" : 204,

@@ -10,12 +10,14 @@ import ObjectMapper
 
 struct ForecastEntity: Mappable {
     
-    var date: NSDate?
+    var date: Date?
     var imageID: String?
     var temp: Double?
     var description: String?
     
-    init?(_ map: Map) { }
+    init?(map: Map) {
+        mapping(map: map)
+    }
     
     mutating func mapping(map: Map) {
         date <- (map["dt"], DateTransform())

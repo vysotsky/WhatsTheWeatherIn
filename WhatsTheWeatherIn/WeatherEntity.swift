@@ -25,7 +25,9 @@ struct WeatherEntity: Mappable {
         }
     }
     
-    init?(_ map: Map) { }
+    init?(map: Map) {
+        mapping(map: map)
+    }
     
     mutating func mapping(map: Map) {
         cityName <- map["city.name"]
