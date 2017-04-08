@@ -11,4 +11,5 @@ target 'WhatsTheWeatherIn' do
     pod 'ObjectMapper'
     pod 'SDWebImage', '~>3.7'
     pod 'AlamofireImage'
+    pod 'Swinject'
 end
