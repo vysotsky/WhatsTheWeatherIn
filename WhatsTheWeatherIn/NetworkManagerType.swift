@@ -30,7 +30,7 @@ class MoyaNetworkManager: NetworkManagerType {
     }
 
     func requestWeatherForCity(_ city: String) -> Observable<WeatherEntity?> {
-        return provider.request(WeatherService.data(city)).map({ response in
+        return provider.request(.data(city)).map({ response in
             guard let mapped = self.mapper.map(JSON: try JSONSerialization.jsonObject(with: response.data, options: .allowFragments) as! [String : Any]) else {
                 return nil
             }

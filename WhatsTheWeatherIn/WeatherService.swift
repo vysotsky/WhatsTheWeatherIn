@@ -26,16 +26,16 @@ extension WeatherService: TargetType {
         switch self {
         case .data(let city):
             return [
-                "q": city as AnyObject,
-                "units": "metric" as AnyObject,
-                "type": "like" as AnyObject,
-                "APPID": "bb0767fb39bfaa7d436bfdccebdcd532" as AnyObject
+                "q": city,
+                "units": "metric",
+                "type": "like",
+                "APPID": "bb0767fb39bfaa7d436bfdccebdcd532"
             ]
         }
     }
     
     public var parameterEncoding: ParameterEncoding {
-        return JSONEncoding.default
+        return URLEncoding.default
     }
 
     var sampleData: Foundation.Data {
