@@ -6,9 +6,11 @@
 //  Copyright © 2016 marinbenc. All rights reserved.
 //
 
+import Foundation
 import RxSwift
 import Moya
 import ObjectMapper
+import Alamofire
 
 extension NSDate {
 
@@ -48,7 +50,7 @@ public extension SequenceType {
     }
 }
 
-extension Response {
+extension Moya.Response {
 
     public func mapObject<T: Mappable>() throws -> T {
         guard let object = Mapper<T>().map(try mapJSON()) else {
@@ -58,7 +60,7 @@ extension Response {
     }
 }
 
-extension ObservableType where E == Response {
+extension ObservableType where E == Moya.Response {
 
     public func mapObject<T: Mappable>(type: T.Type) -> Observable<T> {
         return observeOn(SerialDispatchQueueScheduler(globalConcurrentQueueQOS: .Background))

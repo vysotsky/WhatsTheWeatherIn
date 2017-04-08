@@ -20,6 +20,7 @@ PODS:
   - SDWebImage (3.8.2):
     - SDWebImage/Core (= 3.8.2)
   - SDWebImage/Core (3.8.2)
+  - Swinject (2.0.0)
 
 DEPENDENCIES:
   - Alamofire (~> 3.0)
@@ -31,6 +32,7 @@ DEPENDENCIES:
   - RxCocoa (~> 2.2.0)
   - RxSwift (~> 2.2.0)
   - SDWebImage (~> 3.7)
+  - Swinject
 
 SPEC CHECKSUMS:
   Alamofire: 0dfba1184a543e2aa160f4e39cac4e8aba48d223
@@ -42,7 +44,8 @@ SPEC CHECKSUMS:
   RxCocoa: 42efb7a7145a8d1d5878e94ce48a580d29e0c796
   RxSwift: b8a749f2204c6c7a5c29b306a9c3bc11d5b87c5b
   SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
+  Swinject: 2e964a80d70ab09b3949c99032711f89147bfd60
 
-PODFILE CHECKSUM: 23e40c7a7feec928f8e908a8c4b8331ec0fd7cf4
+PODFILE CHECKSUM: 08e1241f44683f6d75f5237a46be740023251ef9
 
 COCOAPODS: 1.2.0

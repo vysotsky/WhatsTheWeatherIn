@@ -16,7 +16,7 @@ enum WeatherService {
 
 extension WeatherService: TargetType {
 
-    var baseURL: NSURL { return NSURL(string: "http://api.openweathermap.org")! }
+    var baseURL: NSURL { return NSURL(string: AppDelegate.resolve(NetworkConfigType.self).baseUrl)! }
 
     var path: String { return "/data/2.5/forecast" }
 

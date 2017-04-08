@@ -9,7 +9,13 @@
 import Foundation
 import RxSwift
 
-class BaseViewModel<T, E>: NSObject {
+class BaseViewModel<T, E>: NSObject, ViewModelType {
+
+    class var name: String! {
+        get {
+            return "base_model"
+        }
+    }
 
     var boundToViewController = false {
         didSet {
@@ -35,5 +41,4 @@ class BaseViewModel<T, E>: NSObject {
 
     internal func updateForEmptyState() {
     }
-    
 }

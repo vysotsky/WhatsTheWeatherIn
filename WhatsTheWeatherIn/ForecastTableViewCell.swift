@@ -29,7 +29,8 @@ class ForecastTableViewCell: UITableViewCell {
                 cityDegreesLabel.text = "\(temp)°C"
             }
             weatherMessageLabel.text = forecastToShow.description
-            weatherImageOutlet.sd_setImageWithURL(NSURL(string: Constants.baseImageURL + forecastToShow.imageID! + Constants.imageExtension)!)
+            let imageLoader = AppDelegate.resolve(ImageLoaderType.self)
+            imageLoader.loadImageTo(weatherImageOutlet, url: NSURL(string: Constants.baseImageURL + forecastToShow.imageID! + Constants.imageExtension)!)
         }
     }
 

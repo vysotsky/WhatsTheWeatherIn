@@ -23,7 +23,7 @@ class WeatherTableViewController: BaseTableViewController, UIAlertViewDelegate {
 
     // MARK: Lifecycle
 
-    var viewModel = WeatherTableViewModel()
+    var viewModel: WeatherTableViewModel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
