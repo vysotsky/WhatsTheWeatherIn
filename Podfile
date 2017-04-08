@@ -10,4 +10,5 @@ target 'WhatsTheWeatherIn' do
     pod 'ObjectMapper'
     pod 'Swinject'
     pod 'SwinjectStoryboard'
+    pod 'Kingfisher'
 end

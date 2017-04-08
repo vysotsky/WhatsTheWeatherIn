@@ -17,4 +17,5 @@ struct WeatherTableViewContainer {
         self.title = title
         self.data = data
     }
+    
 }

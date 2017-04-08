@@ -7,13 +7,12 @@
 //
 
 import UIKit
+import Kingfisher
 
 class ForecastTableViewCell: UITableViewCell {
 
     var forecast: ForecastEntity? {
-        didSet {
-            updateCell()
-        }
+        didSet { updateCell() }
     }
 
     @IBOutlet weak var dateLabel: UILabel!
@@ -28,8 +27,8 @@ class ForecastTableViewCell: UITableViewCell {
                 cityDegreesLabel.text = "\(temp)°C"
             }
             weatherMessageLabel.text = forecastToShow.description
-            let imageLoader = AppDelegate.resolve(ImageLoaderType.self)
-            imageLoader.loadImageTo(weatherImageOutlet, url: URL(string: Constants.baseImageURL + forecastToShow.imageID! + Constants.imageExtension)!)
+            let imageUrl = URL(string: "http://openweathermap.org/img/w/\(forecastToShow.imageID!).png")!
+            weatherImageOutlet.kf.setImage(with: imageUrl)
         }
     }
 
@@ -37,4 +36,5 @@ class ForecastTableViewCell: UITableViewCell {
         super.awakeFromNib()
         updateCell()
     }
+    
 }

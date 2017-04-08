@@ -11,20 +11,30 @@ import ObjectMapper
 import Moya
 
 enum WeatherService {
-    case data(String)
+    case forCity(String)
 }
 
 extension WeatherService: TargetType {
-
+    
     var baseURL: URL { return URL(string: "http://api.openweathermap.org")! }
-
-    var path: String { return "/data/2.5/forecast" }
-
-    var method: Moya.Method { return .get }
-
+    
+    var path: String {
+        switch self {
+        case .forCity:
+            return "/data/2.5/forecast"
+        }
+    }
+    
+    var method: Moya.Method {
+        switch self {
+        case .forCity:
+            return .get
+        }
+    }
+    
     var parameters: [String: Any]? {
         switch self {
-        case .data(let city):
+        case .forCity(let city):
             return [
                 "q": city,
                 "units": "metric",
@@ -35,18 +45,31 @@ extension WeatherService: TargetType {
     }
     
     public var parameterEncoding: ParameterEncoding {
-        return URLEncoding.default
+        switch self {
+        case .forCity:
+            return URLEncoding.default
+        }
     }
-
-    var sampleData: Foundation.Data {
-        return "".data(using: String.Encoding.utf8)!
+    
+    var sampleData: Data {
+        switch self {
+        case .forCity:
+            return Data()
+        }
     }
     
     var task: Task {
-    return .request
+        switch self {
+        case .forCity:
+            return .request
+        }
     }
     
     var validate: Bool {
-    return false
+        switch self {
+        case .forCity:
+            return false
+        }
     }
+    
 }

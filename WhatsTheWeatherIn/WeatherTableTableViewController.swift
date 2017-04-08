@@ -12,7 +12,7 @@ import RxCocoa
 import RxSwift
 import Alamofire
 
-class WeatherTableViewController: BaseTableViewController, UIAlertViewDelegate {
+class WeatherTableViewController: RxTableViewController, UIAlertViewDelegate {
 
     // MARK: Outlets
     @IBOutlet weak var cityTextField: UITextField!
@@ -30,8 +30,8 @@ class WeatherTableViewController: BaseTableViewController, UIAlertViewDelegate {
 
         cityTextField.rx.text
             .debounce(0.3, scheduler: MainScheduler.instance)
-            .subscribe(onNext: { searchText in
-                self.viewModel.searchText = searchText
+            .subscribe(onNext: { cityName in
+                self.viewModel.request(for: cityName)
         })
             .addDisposableTo(disposeBag)
 
@@ -48,13 +48,11 @@ class WeatherTableViewController: BaseTableViewController, UIAlertViewDelegate {
 
     // MARK: Table view data source
     var tableViewData: Array<WeatherTableViewContainer>? {
-        didSet {
-            self.tableView.reloadData()
-        }
+        didSet { tableView.reloadData() }
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return tableViewData == nil ? 0 : tableViewData!.count
+        return tableViewData?.count ?? 0
     }
 
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -62,13 +60,13 @@ class WeatherTableViewController: BaseTableViewController, UIAlertViewDelegate {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return tableViewData == nil ? 0 : tableViewData![section].data.count
+        return tableViewData?[section].data.count ?? 0
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> ForecastTableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "forecastCell", for: indexPath) as! ForecastTableViewCell
 
-        cell.forecast = tableViewData == nil ? nil : tableViewData![indexPath.section].data[indexPath.row]
+        cell.forecast = tableViewData?[indexPath.section].data[indexPath.row] ?? nil
         return cell
     }
 }

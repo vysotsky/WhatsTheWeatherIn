@@ -10,22 +10,19 @@ import RxSwift
 import Moya
 import ObjectMapper
 
-protocol NetworkManagerType {
+fileprivate let weatherProvider = RxMoyaProvider<WeatherService>()
+fileprivate let mapper = Mapper<WeatherEntity>()
+
+protocol NetworkManager {
     
-    func requestWeatherForCity(_ city: String) -> Observable<WeatherEntity?>
+    func requestWeather(for city: String) -> Observable<WeatherEntity?>
 }
 
-class MoyaNetworkManager: NetworkManagerType {
+class NetworkManagerImpl: NetworkManager {
     
-    let mapper = Mapper<WeatherEntity>()
-    
-    fileprivate lazy var provider: RxMoyaProvider<WeatherService> = {
-        RxMoyaProvider<WeatherService>()
-    }()
-
-    func requestWeatherForCity(_ city: String) -> Observable<WeatherEntity?> {
-        return provider.request(.data(city)).map({ response in
-            guard let mapped = self.mapper.map(JSON: try JSONSerialization.jsonObject(with: response.data, options: .allowFragments) as! [String : Any]) else {
+    func requestWeather(for city: String) -> Observable<WeatherEntity?> {
+        return weatherProvider.request(.forCity(city)).map({ response in
+            guard let mapped = mapper.map(JSON: try JSONSerialization.jsonObject(with: response.data, options: .allowFragments) as! [String : Any]) else {
                 return nil
             }
             return mapped

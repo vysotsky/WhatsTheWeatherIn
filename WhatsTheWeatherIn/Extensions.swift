@@ -29,15 +29,6 @@ extension Date {
     }
 }
 
-extension NSObject {
-
-    func dispatchInMainQueue(_ closure: @escaping () -> Void) {
-        DispatchQueue.main.async {
-            closure()
-        }
-    }
-}
-
 public extension Sequence {
 
     func categorise<U : Hashable>(_ fun: (Iterator.Element) -> U) -> Dictionary<U, [Iterator.Element]> {

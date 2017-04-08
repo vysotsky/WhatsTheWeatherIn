@@ -15,30 +15,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-    var container: Container = {
-        let container = Container()
+    var container = Container() { container in
+        
+        container.register(NetworkManager.self) { _ in NetworkManagerImpl() }
 
-        container.register(ViewModelType.self, name: WeatherTableViewModel.name) { _ in WeatherTableViewModel() }
+        container.register(ViewModel.self, name: WeatherTableViewModel.name) { r in WeatherTableViewModel(networkManager: r.resolve(NetworkManager.self)!) }
 
         container.storyboardInitCompleted(WeatherTableViewController.self) { r, c in
-            c.viewModel = r.resolve(ViewModelType.self, name: WeatherTableViewModel.name) as! WeatherTableViewModel
+            c.viewModel = r.resolve(ViewModel.self, name: WeatherTableViewModel.name) as! WeatherTableViewModel
         }
 
-        container.register(ImageLoaderType.self) { _ in NativeWebImageLoader() }
-        container.register(NetworkManagerType.self) { _ in MoyaNetworkManager() }
-
-        return container
-    }()
+    }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-
-        let window = UIWindow(frame: UIScreen.main.bounds)
-        window.makeKeyAndVisible()
-        self.window = window
+  
+        self.window = UIWindow(frame: UIScreen.main.bounds)
 
         let storyboard = SwinjectStoryboard.create(name: "Main", bundle: nil, container: container)
-        window.rootViewController = storyboard.instantiateInitialViewController()
+        window?.rootViewController = storyboard.instantiateInitialViewController()
 
+        window?.makeKeyAndVisible()
         return true
     }
 
@@ -48,8 +44,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
 
-    class func resolve<ObjectType>(_ type: ObjectType.Type) -> ObjectType {
-        return sharedInstance.container.resolve(type)!
-    }
 }
 
