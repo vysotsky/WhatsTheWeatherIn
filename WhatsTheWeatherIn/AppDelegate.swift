@@ -24,9 +24,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             c.viewModel = r.resolve(ViewModelType.self, name: WeatherTableViewModel.name) as! WeatherTableViewModel
         }
 
-        container.register(ImageLoaderType.self) { _ in AlamofireImageLoader() }
-        container.register(NetworkConfigType.self) { _ in OpenWeatherApiConfig() }
-        container.register(NetworkManagerType.self) { r in MoyaNetworkManager(config: r.resolve(NetworkConfigType.self)!) }
+        container.register(ImageLoaderType.self) { _ in NativeWebImageLoader() }
+        container.register(NetworkManagerType.self) { _ in MoyaNetworkManager() }
 
         return container
     }()

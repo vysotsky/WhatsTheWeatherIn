@@ -11,23 +11,17 @@ import Moya
 import ObjectMapper
 
 protocol NetworkManagerType {
-    var config: NetworkConfigType! { get }
     
     func requestWeatherForCity(_ city: String) -> Observable<WeatherEntity?>
 }
 
 class MoyaNetworkManager: NetworkManagerType {
     
-    var config: NetworkConfigType!
     let mapper = Mapper<WeatherEntity>()
     
     fileprivate lazy var provider: RxMoyaProvider<WeatherService> = {
         RxMoyaProvider<WeatherService>()
     }()
- 
-    init(config: NetworkConfigType) {
-        self.config = config
-    }
 
     func requestWeatherForCity(_ city: String) -> Observable<WeatherEntity?> {
         return provider.request(.data(city)).map({ response in

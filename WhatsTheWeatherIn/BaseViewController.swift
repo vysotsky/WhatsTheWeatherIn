@@ -8,7 +8,6 @@
 
 import UIKit
 import RxSwift
-import SDWebImage
 
 class BaseTableViewController: UITableViewController {
 

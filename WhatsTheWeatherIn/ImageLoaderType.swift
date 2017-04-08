@@ -7,18 +7,9 @@
 //
 
 import UIKit
-import AlamofireImage
 
 protocol ImageLoaderType {
     func loadImageTo(_ imageView: UIImageView, url: URL)
-}
-
-class SDWebImageLoader: ImageLoaderType {
-    
-    func loadImageTo(_ imageView: UIImageView, url: URL) {
-        imageView.sd_setImage(with: url, placeholderImage: nil, options: [.refreshCached])
-    }
-    
 }
 
 class NativeWebImageLoader: ImageLoaderType {
@@ -31,14 +22,6 @@ class NativeWebImageLoader: ImageLoaderType {
                 }
             }
         }
-    }
-    
-}
-
-class AlamofireImageLoader: ImageLoaderType {
-
-    func loadImageTo(_ imageView: UIImageView, url: URL) {
-        imageView.af_setImage(withURL: url)
     }
     
 }
