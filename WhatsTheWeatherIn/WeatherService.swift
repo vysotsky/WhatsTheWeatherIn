@@ -29,7 +29,7 @@ extension WeatherService: TargetType {
                 "q": city as AnyObject,
                 "units": "metric" as AnyObject,
                 "type": "like" as AnyObject,
-                "APPID": "6a700a1e919dc96b0a98901c9f4bec47" as AnyObject
+                "APPID": "bb0767fb39bfaa7d436bfdccebdcd532" as AnyObject
             ]
         }
     }
