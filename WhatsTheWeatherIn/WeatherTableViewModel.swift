@@ -16,14 +16,10 @@ import ObjectMapper
 
 class WeatherTableViewModel: ViewModel<WeatherEntity?, Void> {
     
-    var networkManager: NetworkManager
+    private var networkManager: NetworkManager
     
     init(networkManager: NetworkManager) {
         self.networkManager = networkManager
-    }
-    
-    override class var name: String {
-        return String(describing: WeatherTableViewModel.self)
     }
     
     // MARK: Model
@@ -31,13 +27,30 @@ class WeatherTableViewModel: ViewModel<WeatherEntity?, Void> {
         didSet { notifyDataChanged() }
     }
     
-    // MARK: UI Subjects
-    let cityName = PublishSubject<String?>()
-    let degrees = PublishSubject<String?>()
-    let weatherDescription = PublishSubject<String?>()
-    let weatherImage = PublishSubject<URL?>()
-    let backgroundImage = PublishSubject<UIImage?>()
-    let tableViewData = PublishSubject<Array<WeatherTableViewContainer>?>()
+    private let cityName = PublishSubject<String?>()
+    func bindCityName(to label: UILabel){
+        bind(cityName, to: label)
+    }
+    
+    private let degrees = PublishSubject<String?>()
+    func bindDegrees(to label: UILabel){
+        bind(degrees, to: label)
+    }
+    
+    private let weatherDescription = PublishSubject<String?>()
+    func bindWeatherDescription(to label: UILabel){
+        bind(weatherDescription, to: label)
+    }
+    
+    private let weatherImage = PublishSubject<URL?>()
+    func bindWeatherImage(to imageView: UIImageView){
+        bind(weatherImage, to: imageView)
+    }
+
+    private let forecasts = PublishSubject<Array<(title: String, data: [ForecastEntity])>?>()
+    func bindForecasts(to handler: @escaping (Array<(title: String, data: [ForecastEntity])>?) -> Void){
+        bind(forecasts, to: handler)
+    }
     
     func request(for cityName: String?) {
         if let cityName = cityName, cityName != "" {
@@ -70,7 +83,7 @@ class WeatherTableViewModel: ViewModel<WeatherEntity?, Void> {
         
         weatherImage.on(.next(URL(string: "https://unsplash.it/800/600/?random")))
         if let forecast = weather.forecast {
-            tableViewData.on(.next(forecast.categorise { $0.date!.dayString }.map { WeatherTableViewContainer(title: $0.0, data: $0.1) }))
+            forecasts.on(.next(forecast.categorise { $0.date!.dayString }.map { (title: $0.0, data: $0.1) }))
         }
     }
     
@@ -86,7 +99,7 @@ class WeatherTableViewModel: ViewModel<WeatherEntity?, Void> {
         degrees.on(.next(nil))
         weatherDescription.on(.next(nil))
         weatherImage.on(.next(nil))
-        tableViewData.on(.next(nil))
+        forecasts.on(.next(nil))
     }
     
 }

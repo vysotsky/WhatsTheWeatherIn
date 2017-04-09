@@ -25,4 +25,5 @@ struct ForecastEntity: Mappable {
         imageID <- map["weather.0.icon"]
         description <- map["weather.0.description"]
     }
+    
 }

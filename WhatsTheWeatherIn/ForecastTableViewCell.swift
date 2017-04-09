@@ -15,10 +15,10 @@ class ForecastTableViewCell: UITableViewCell {
         didSet { updateCell() }
     }
 
-    @IBOutlet weak var dateLabel: UILabel!
-    @IBOutlet weak var cityDegreesLabel: UILabel!
-    @IBOutlet weak var weatherMessageLabel: UILabel!
-    @IBOutlet weak var weatherImageOutlet: UIImageView!
+    @IBOutlet private weak var dateLabel: UILabel!
+    @IBOutlet private weak var cityDegreesLabel: UILabel!
+    @IBOutlet private weak var weatherMessageLabel: UILabel!
+    @IBOutlet private weak var weatherImageOutlet: UIImageView!
 
     fileprivate func updateCell() {
         if let forecastToShow = forecast {

@@ -14,15 +14,7 @@ struct WeatherEntity: Mappable {
     var forecast: [ForecastEntity]?
     
     var currentWeather: ForecastEntity? {
-        if let forecastArray = forecast {
-            if !forecastArray.isEmpty {
-                return forecastArray[0]
-            } else {
-                return nil
-            }
-        } else {
-            return nil
-        }
+        return forecast?.first
     }
     
     init?(map: Map) {
@@ -33,4 +25,5 @@ struct WeatherEntity: Mappable {
         cityName <- map["city.name"]
         forecast <- map["list"]
     }
+    
 }
