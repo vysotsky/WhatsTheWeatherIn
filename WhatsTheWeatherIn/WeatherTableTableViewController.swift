@@ -12,9 +12,12 @@ import RxCocoa
 import RxSwift
 import Alamofire
 
-class WeatherTableViewController: RxTableViewController, UIAlertViewDelegate {
+class WeatherTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIAlertViewDelegate, UIBarPositioningDelegate {
+    
+    var disposeBag = DisposeBag()
 
     // MARK: Outlets
+    @IBOutlet private weak var tableView: UITableView!
     @IBOutlet private weak var cityTextField: UITextField!
     @IBOutlet private weak var cityNameLabel: UILabel!
     @IBOutlet private weak var cityDegreesLabel: UILabel!
@@ -48,25 +51,32 @@ class WeatherTableViewController: RxTableViewController, UIAlertViewDelegate {
 
     // MARK: Table view data source
     var forecasts: Array<(title: String, data: [ForecastEntity])>? {
-        didSet { tableView.reloadData() }
+        didSet {
+            tableView.reloadData()
+        }
     }
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return forecasts?.count ?? 0
     }
 
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return forecasts?[section].title
     }
 
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return forecasts?[section].data.count ?? 0
     }
 
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> ForecastTableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "forecastCell", for: indexPath) as! ForecastTableViewCell
 
         cell.forecast = forecasts?[indexPath.section].data[indexPath.row] ?? nil
         return cell
     }
+    
+    func position(for bar: UIBarPositioning) -> UIBarPosition {
+        return .topAttached
+    }
+    
 }

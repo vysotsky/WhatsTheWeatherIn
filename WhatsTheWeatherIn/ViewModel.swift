@@ -8,6 +8,7 @@
 
 import Foundation
 import RxSwift
+import Kingfisher
 
 class ViewModel<T, E>: NSObject {
 
@@ -60,7 +61,7 @@ class ViewModel<T, E>: NSObject {
         source.observeOn(MainScheduler.instance)
             .subscribe(onNext: {  url in
                 if let url = url {
-                    imageView.kf.setImage(with: url)
+                    imageView.kf.setImage(with: url, options: [.forceRefresh])
                 } else {
                     imageView.image = nil
                 }

@@ -18,10 +18,9 @@
 		9CEF80F81BBFC4EA007ECB47 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9CEF80F61BBFC4EA007ECB47 /* LaunchScreen.storyboard */; };
 		F51F83D01CC0FEB900FB48A7 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F51F83CF1CC0FEB900FB48A7 /* ViewModel.swift */; };
 		F594C7C61C986D0900706BF6 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F594C7C51C986D0900706BF6 /* Extensions.swift */; };
-		F5EE7EB01CC135DF00DF92B3 /* RxTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5EE7EAF1CC135DF00DF92B3 /* RxTableViewController.swift */; };
 		F5EE7EC11CC4EF8400DF92B3 /* WeatherEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5EE7EC01CC4EF8400DF92B3 /* WeatherEntity.swift */; };
 		F5EE7EC31CC4EFB700DF92B3 /* ForecastEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5EE7EC21CC4EFB700DF92B3 /* ForecastEntity.swift */; };
-		F5EE7ED01CC6448100DF92B3 /* NetworkManagerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5EE7ECF1CC6448100DF92B3 /* NetworkManagerType.swift */; };
+		F5EE7ED01CC6448100DF92B3 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5EE7ECF1CC6448100DF92B3 /* NetworkManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,10 +39,9 @@
 		D42B994A331EC686C1FAE5D8 /* Pods-WhatsTheWeatherIn.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WhatsTheWeatherIn.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WhatsTheWeatherIn/Pods-WhatsTheWeatherIn.debug.xcconfig"; sourceTree = "<group>"; };
 		F51F83CF1CC0FEB900FB48A7 /* ViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		F594C7C51C986D0900706BF6 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
-		F5EE7EAF1CC135DF00DF92B3 /* RxTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxTableViewController.swift; sourceTree = "<group>"; };
 		F5EE7EC01CC4EF8400DF92B3 /* WeatherEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherEntity.swift; sourceTree = "<group>"; };
 		F5EE7EC21CC4EFB700DF92B3 /* ForecastEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForecastEntity.swift; sourceTree = "<group>"; };
-		F5EE7ECF1CC6448100DF92B3 /* NetworkManagerType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManagerType.swift; sourceTree = "<group>"; };
+		F5EE7ECF1CC6448100DF92B3 /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,7 +119,6 @@
 		F5EE7EB81CC4EEAD00DF92B3 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				F5EE7EAF1CC135DF00DF92B3 /* RxTableViewController.swift */,
 				9C1D3FC21BD691D5007A2865 /* WeatherTableTableViewController.swift */,
 			);
 			name = ViewControllers;
@@ -182,7 +179,7 @@
 		F5EE7EC61CC4F9B500DF92B3 /* DI */ = {
 			isa = PBXGroup;
 			children = (
-				F5EE7ECF1CC6448100DF92B3 /* NetworkManagerType.swift */,
+				F5EE7ECF1CC6448100DF92B3 /* NetworkManager.swift */,
 			);
 			name = DI;
 			sourceTree = "<group>";
@@ -310,13 +307,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F5EE7ED01CC6448100DF92B3 /* NetworkManagerType.swift in Sources */,
+				F5EE7ED01CC6448100DF92B3 /* NetworkManager.swift in Sources */,
 				9C1D3FB81BD29384007A2865 /* ForecastTableViewCell.swift in Sources */,
 				9CA525ED1BCA4D8900029D72 /* WeatherService.swift in Sources */,
 				F5EE7EC31CC4EFB700DF92B3 /* ForecastEntity.swift in Sources */,
 				9C1D3FC31BD691D5007A2865 /* WeatherTableViewModel.swift in Sources */,
 				9CEF80EE1BBFC4EA007ECB47 /* AppDelegate.swift in Sources */,
-				F5EE7EB01CC135DF00DF92B3 /* RxTableViewController.swift in Sources */,
 				F5EE7EC11CC4EF8400DF92B3 /* WeatherEntity.swift in Sources */,
 				9C1D3FC41BD691D5007A2865 /* WeatherTableTableViewController.swift in Sources */,
 				F51F83D01CC0FEB900FB48A7 /* ViewModel.swift in Sources */,

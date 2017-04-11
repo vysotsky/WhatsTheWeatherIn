@@ -15,11 +15,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-    var container = Container() { container in
+    let container = Container() { container in
         
-        container.register(NetworkManager.self) { _ in NetworkManagerImpl() }
+        container.register(NetworkManager.self) { _ in
+            NetworkManagerImpl()
+        }
 
-        container.register(ViewModel.self, name: WeatherTableViewModel.name) { r in WeatherTableViewModel(networkManager: r.resolve(NetworkManager.self)!) }
+        container.register(ViewModel.self, name: WeatherTableViewModel.name) { r in
+            WeatherTableViewModel(networkManager: r.resolve(NetworkManager.self)!)
+        }
 
         container.storyboardInitCompleted(WeatherTableViewController.self) { r, c in
             c.viewModel = r.resolve(ViewModel.self, name: WeatherTableViewModel.name) as! WeatherTableViewModel
